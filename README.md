@@ -30,7 +30,13 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
 > * Describe how you finish this work in detail
 
 1. Environment Setup
-
+   - 首先先載PieTTY IP位址為140.133.195.69 port為13316(學號末5碼)
+   - 登入 Login:root Password:0210 (改密碼 指令:passwd)
+   - 輸入指令:git clone https://github.com/nctucn/lab2-isbecky27.git Network_Topology 將檔案複製下來
+   - 接著登入github Username for 'https://github.com': isbecky27 和 Password for 'https://isbecky27@github.com': 密碼
+   - 試著執行 Mininet 使用指令:sudo mn 接下來若跑出錯誤訊息 如:You may wish to try "service openvswitch-switch start".
+   - 則輸入指令:sudo service openvswitch-switch start 然後再執行一次 sudo mn 即可
+   
 2. Example of Ryu SDN
 
 3. Mininet Topology
@@ -93,7 +99,7 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
 > TODO:
 > * Please replace "`YOUR_NAME`" and "`YOUR_GITHUB_LINK`" into yours
 
-* [YOUR_NAME](YOUR_GITHUB_LINK)
+* [Ching](https://github.com/isbecky27)
 * [David Lu](https://github.com/yungshenglu)
 
 ---
