@@ -104,13 +104,13 @@ class SimpleController1(app_manager.RyuApp):
                 actions=actions)
             # For h2-h1 flow: s2 -> s1 -> h1
             match = parser.OFPMatch(
-                in_port=2, #port2接收
+                in_port=2,
                 eth_type=0x0800,
                 ipv4_src="10.0.0.2",
                 ipv4_dst="10.0.0.1",
                 ip_proto=17,
                 udp_dst=5566)
-            actions = [parser.OFPActionOutput(1)] #從port1輸出
+            actions = [parser.OFPActionOutput(1)]
             self.add_flow(
                 datapath=datapath,
                 priority=3,
@@ -138,13 +138,13 @@ class SimpleController1(app_manager.RyuApp):
         if msg.datapath.id == 3:
             # For h2-h1 flow: h2 -> s3 -> s2
             match = parser.OFPMatch(
-                in_port=1, #port1接收來自h2的封包
+                in_port=1,
                 eth_type=0x0800,
                 ipv4_src="10.0.0.2",
                 ipv4_dst="10.0.0.1",
                 ip_proto=17,
                 udp_dst=5566)
-            actions = [parser.OFPActionOutput(3)] #port3輸出給s2
+            actions = [parser.OFPActionOutput(3)]
             self.add_flow(
                 datapath=datapath,
                 priority=3,
@@ -165,7 +165,7 @@ class SimpleController1(app_manager.RyuApp):
                 match=match,
                 actions=actions)
 
-    
+ 
     '''
     METHOD : packet_in_handler (@set_ev_cls)
     Handle the packet-in events (DO NOT MODIFY)
