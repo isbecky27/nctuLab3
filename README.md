@@ -63,10 +63,18 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
    - 並修改switch_features_handler(self, ev)的部分(依據topo.png的資訊)
 
 5. Measurement
-   - 在第一個終端機執行topo.py 指令:sudo mn --custom SimpleTopo.py --topo topo --link tc --controller remote
+   - 在第一個終端機執行topo.py 指令:sudo mn --custom topo.py --topo topo --link tc --controller remote
    - 接著在另一台終端機內執行SimpleController.py 指令:sudo ryu-manager SimpleController.py –-observe-links 
-   - 測試頻寬mininet> h1 iperf -s -u -i 1 –p 5566 > ./out/result1 & 和 mininet> h2 iperf -c 10.0.0.1 -u –i 1 –p 5566
-   - 
+   - 輸入iPerf指令 測試頻寬mininet> h1 iperf -s -u -i 1 –p 5566 > ./out/result1 & 和 mininet> h2 iperf -c 10.0.0.1 -u –i 1 –p 5566
+   - 執行後的結果result1會在出現在out資料夾中
+   - 輸入:exit 離開mininet(topo.py) 再按Ctrl-z離開另一個終端機(SimpleController.py)
+   - 最後輸入mn -c 確認"RTNETLINK"為乾淨的
+   - 再來在第一個終端機執行topo.py 指令:sudo mn --custom topo.py --topo topo --link tc --controller remote
+   - 接著在另一台終端機內執行controller.py 指令:sudo ryu-manager controller.py –-observe-links 
+   - 輸入iPerf指令 測試頻寬mininet> h1 iperf -s -u -i 1 –p 5566 > ./out/result2 & 和 mininet> h2 iperf -c 10.0.0.1 -u –i 1 –p 5566
+   - 輸入:exit 離開mininet(topo.py) 再按Ctrl-z離開另一個終端機(controller.py)
+   - 最終的結果result2會出現在out資料夾中
+
 
 ### Discussion
 
