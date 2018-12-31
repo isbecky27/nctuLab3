@@ -95,6 +95,7 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
 5. What is the meaning of “datapath” in `controller.py`?
    
 6. Why need to set "`ip_proto=17`" in the flow entry?
+   設定IP協定種類為UDP
    
 7. Compare the differences between the iPerf results of `SimpleController.py` and `controller.py` in detail.
    
