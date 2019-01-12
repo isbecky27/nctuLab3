@@ -20,17 +20,27 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
 > * How to run your program?
 > * What is the meaning of the executing command (both Mininet and Ryu controller)?
 > * Show the screenshot of using iPerf command in Mininet (both `SimpleController.py` and `controller.py`)
-1. Run the program
 
-2. Meaning of the excuting command
-   - [sudo] mn --custom topo.py --topo topo --link tc --controller remote
-   - [sudo] ryu-manager SimpleController.py –-observe-links 
-   - [sudo] ryu-manager controller.py –-observe-links
-   - mininet> h1 iperf -s -u -i 1 –p 5566 > ./out/result1 & 
-   - mininet> h1 iperf -s -u -i 1 –p 5566 > ./out/result2 & 
-   - mininet> h2 iperf -c 10.0.0.1 -u –i 1 –p 5566
+1. Run the program & Meaning of the excuting command
+- [sudo] mn --custom topo.py --topo topo --link tc --controller remote
+- [sudo] ryu-manager SimpleController.py –-observe-links 
+- [sudo] ryu-manager controller.py –-observe-links
+- mininet> h1 iperf -s -u -i 1 –p 5566 > ./out/result1 &
+   - host 1 開啟iPerf 以server模式啟動 使用udp通訊協定 每隔1s更新頻寬資訊 server和client溝通port為5566 結果result1檔會傳至out資料夾中
+- mininet> h1 iperf -s -u -i 1 –p 5566 > ./out/result2 &
+   - host 1 開啟iPerf 以server模式啟動 使用udp通訊協定 每隔1s更新頻寬資訊 server和client溝通port為5566 結果result2檔會傳至out資料夾中
+- mininet> h2 iperf -c 10.0.0.1 -u –i 1 –p 5566
+   - host 2 開啟iPerf 以client模式啟動 並連線到IP為10.0.0.1的server(host 1) 使用udp通訊協定 每隔1s更新頻寬資訊 server和client溝通port為5566
+- 指令
+   - sudo mn 進入到mininet> 
+- iPerf指令的意思    
+   - -s 以server模式啟動
+   - -u 使用udp協議
+   - -i 每隔多少秒更新頻寬資訊
+   - -c 執行client模式啟動，並連線到server的IP
+   - -p 設定server和client的溝通port
 
-3. Sceenshots of using iPerf command in Mininet
+2. Sceenshots of using iPerf command in Mininet
    - SimpleController.py
    ![image](https://github.com/nctucn/lab3-isbecky27/blob/master/result1.jpg)
    - controller.py
@@ -94,9 +104,13 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
 > * Answer the following questions
 
 1. Describe the difference between packet-in and packet-out in detail.
+   - Packet-In : 將接收到的封包轉送到 Controller 的動作。
+   - Packet-Out : 將接收到來自 Controller 的封包轉送到指定的連接埠(Switch)。
    
 2. What is “table-miss” in SDN?
-   
+   - 若一個封包在Flow Table尋找符合規則的Flow Entry時，都找不到能夠匹配的Flow Entry，這種情況就稱為Table Miss。
+   - 發生Table Miss後的動作取決於這個Flow Table的配置，可能直接丟棄、繼續轉發給後續的Flow Table，或者封裝成packet-in訊息發送給Controller。
+
 3. Why is "`(app_manager.RyuApp)`" adding after the declaration of class in `controller.py`?
    
 4. Explain the following code in `controller.py`.
@@ -107,18 +121,21 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
 5. What is the meaning of “datapath” in `controller.py`?
    
 6. Why need to set "`ip_proto=17`" in the flow entry?
-   設定IP協定種類為UDP
+   - 設定IP協定種類為UDP(port=17)
+   - ip_proto為IP協定的種類，port=17是UDP的專屬port
    
 7. Compare the differences between the iPerf results of `SimpleController.py` and `controller.py` in detail.
    
 8. Which forwarding rule is better? Why?
+   - 
 
 ---
 ## References
 
-> TODO: 
-> * Please add your references in the following
-
+* **References**
+    * [深入OpenFlow協定](https://www.netadmin.com.tw/article_content.aspx?sn=1610070003)
+    * [OpenFlow Switch學習筆記](https://www.cnblogs.com/CasonChan/p/4620652.html)
+    * [Iperf頻寬測試工具@ PiNG^2 :: 隨意窩Xuite日誌](https://blog.xuite.net/u870q217/blog/31513614-Iperf%E9%A0%BB%E5%AF%AC%E6%B8%AC%E8%A9%A6%E5%B7%A5%E5%85%B7)
 * **Ryu SDN**
     * [Ryubook Documentation](https://osrg.github.io/ryu-book/en/html/)
     * [Ryubook [PDF]](https://osrg.github.io/ryu-book/en/Ryubook.pdf)
