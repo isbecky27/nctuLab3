@@ -117,6 +117,11 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
     ```python
     @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
     ```
+   - set_ev_cls的裝飾器。此裝飾器是用來辨別所裝飾的副程式的兩個狀態：
+   - 參數一：負責事件
+   - 參數二：在何種溝通狀況下執行（Ryu 與 Switch 間的溝通狀況）
+   - ofp_event.EventOFPPacketIn表示負責 Packet-In 事件
+   - MAIN_DISPATCHER表示在 Switch 與 Ryu 完成交握的狀況下執行
 
 5. What is the meaning of “datapath” in `controller.py`?
    
