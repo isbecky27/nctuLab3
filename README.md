@@ -18,7 +18,7 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
 
 1. Run the program & Meaning of the excuting command
 - [sudo] mn --custom topo.py --topo topo --link tc --controller remote
-   - 進入到mininet 使用自訂的topo.py topo使用自定義的topo 連線 遠端控制器
+   - 進入到mininet 使用自訂的topo.py topo使用自定義的topo 連線 控制器為遠端控制
 - [sudo] ryu-manager SimpleController.py –-observe-links
    - 啟動Ryu SDN Controller 根據SimpleController.py 建立連線
 - [sudo] ryu-manager controller.py –-observe-links
@@ -29,7 +29,7 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
    - host 1 開啟iPerf 以server模式啟動 使用udp通訊協定 每隔1s更新頻寬資訊 server和client溝通port為5566 結果result2檔會傳至out資料夾中
 - mininet> h2 iperf -c 10.0.0.1 -u –i 1 –p 5566
    - host 2 開啟iPerf 以client模式啟動 並連線到IP為10.0.0.1的server(host 1) 使用udp通訊協定 每隔1s更新頻寬資訊 server和client溝通port為5566
-- 指令
+- Ryu指令
    - sudo mn 進入到mininet>
    - ryu-manager 啟動Ryu SDN Controller
    - --custom 使用客製化的拓樸
@@ -128,13 +128,13 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
    - 在OpenFlow中，datapath代表的就是Switch
    
 6. Why need to set "`ip_proto=17`" in the flow entry?
-   - 設定IP協定種類為UDP(17)
+   - 設定IP協定種類為UDP(為17)
    - ip_proto為IP協定的種類
    
 7. Compare the differences between the iPerf results of `SimpleController.py` and `controller.py` in detail.
    - SimpleController.py的total loss比controller.py多，多次測試兩者大約相差0.9%~1.7%
-   - SimpleController.py的total loss為1.8%(16/893)
-   - controller.py的total loss為3.4%(30/893)
+   - SimpleController.py的total loss為3.4%(30/893)
+   - controller.py的total loss為1.8%(16/893)
    
 8. Which forwarding rule is better? Why?
    - controller.py的fowarding rule比較好，packet loss的%數較低
