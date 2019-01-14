@@ -100,39 +100,44 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
 
 ### Discussion
 
-> TODO:
-> * Answer the following questions
-
 1. Describe the difference between packet-in and packet-out in detail.
    - Packet-In : 將接收到的封包轉送到 Controller 的動作。
    - Packet-Out : 將接收到來自 Controller 的封包轉送到指定的連接埠(Switch)。
    
 2. What is “table-miss” in SDN?
-   - 若一個封包在Flow Table尋找符合規則的Flow Entry時，都找不到能夠匹配的Flow Entry，這種情況就稱為Table Miss。
+   - 若Openflow switch收到一個封包在Flow Table尋找符合規則的Flow Entry時，都找不到能夠匹配的Flow Entry，這種情況就稱為Table Miss。
    - 發生Table Miss後的動作取決於這個Flow Table的配置，可能直接丟棄、繼續轉發給後續的Flow Table，或者封裝成packet-in訊息發送給Controller。
 
 3. Why is "`(app_manager.RyuApp)`" adding after the declaration of class in `controller.py`?
+   - 為了實作Ryu應用程式，都必須繼承app_manager.RyuApp
    
 4. Explain the following code in `controller.py`.
     ```python
     @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
     ```
-   - set_ev_cls的裝飾器。此裝飾器是用來辨別所裝飾的副程式的兩個狀態：
+   - 透過set_ev_cls裝飾器，來辨別所裝飾的副程式的兩個狀態
    - 參數一：負責事件
-   - 參數二：在何種溝通狀況下執行（Ryu 與 Switch 間的溝通狀況）
+   - 參數二：在何種溝通狀況下執行（Ryu與Switch間的溝通狀況，ex連線中斷、交換Hello訊息、一般狀態..等）
    - ofp_event.EventOFPPacketIn表示負責 Packet-In 事件
-   - MAIN_DISPATCHER表示在 Switch 與 Ryu 完成交握的狀況下執行
+   - MAIN_DISPATCHER表示在Switch與Ryu完成交握的狀況下執行(一般狀態:交握完畢）
 
 5. What is the meaning of “datapath” in `controller.py`?
+   - "the switch in the topology using OpenFlow"
+   - Datapath類執行重要的處理，例如與OpenFlow交換機的實際通信以及與接收的消息相對應的事件的發布
    
 6. Why need to set "`ip_proto=17`" in the flow entry?
    - 設定IP協定種類為UDP(port=17)
    - ip_proto為IP協定的種類，port=17是UDP的專屬port
    
 7. Compare the differences between the iPerf results of `SimpleController.py` and `controller.py` in detail.
+   - SimpleController.py的total loss比controller.py多，多次測試兩者大約相差0.9%~1.7%
+   - SimpleController.py的total loss為1.8%(16/893)
+   - controller.py的total loss為3.4%(30/893)
    
 8. Which forwarding rule is better? Why?
-   - 
+   - controller.py的fowarding rule比較好，packet loss的%數較低
+   - 原先的SimpleController.py無論h1送封包至h2或是h2送封包到h2皆走同一條路
+   - 而controller.py則將h2送至h1的封包經由s3交給s2再轉交給s2
 
 ---
 ## References
