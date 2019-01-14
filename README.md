@@ -16,15 +16,13 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
 ---
 ## Execution
 
-> TODO:
-> * How to run your program?
-> * What is the meaning of the executing command (both Mininet and Ryu controller)?
-> * Show the screenshot of using iPerf command in Mininet (both `SimpleController.py` and `controller.py`)
-
 1. Run the program & Meaning of the excuting command
 - [sudo] mn --custom topo.py --topo topo --link tc --controller remote
-- [sudo] ryu-manager SimpleController.py –-observe-links 
+   - 進入到mininet 使用自訂的topo.py topo使用自定義的topo 連線 遠端控制器
+- [sudo] ryu-manager SimpleController.py –-observe-links
+   - 啟動Ryu SDN Controller 根據SimpleController.py 建立連線
 - [sudo] ryu-manager controller.py –-observe-links
+   -  啟動Ryu SDN Controller 根據controller.py 建立連線
 - mininet> h1 iperf -s -u -i 1 –p 5566 > ./out/result1 &
    - host 1 開啟iPerf 以server模式啟動 使用udp通訊協定 每隔1s更新頻寬資訊 server和client溝通port為5566 結果result1檔會傳至out資料夾中
 - mininet> h1 iperf -s -u -i 1 –p 5566 > ./out/result2 &
@@ -32,7 +30,12 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
 - mininet> h2 iperf -c 10.0.0.1 -u –i 1 –p 5566
    - host 2 開啟iPerf 以client模式啟動 並連線到IP為10.0.0.1的server(host 1) 使用udp通訊協定 每隔1s更新頻寬資訊 server和client溝通port為5566
 - 指令
-   - sudo mn 進入到mininet> 
+   - sudo mn 進入到mininet>
+   - ryu-manager 啟動Ryu SDN Controller
+   - --custom 使用客製化的拓樸
+   - --topo 設定特定的拓樸模式及規格
+   - --controller 指定控制器類型
+   - --link 可制定連線的參數 頻寬等
 - iPerf指令的意思    
    - -s 以server模式啟動
    - -u 使用udp協議
@@ -122,8 +125,7 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
    - MAIN_DISPATCHER表示在Switch與Ryu完成交握的狀況下執行(一般狀態:交握完畢）
 
 5. What is the meaning of “datapath” in `controller.py`?
-   - "the switch in the topology using OpenFlow"
-   - Datapath類執行重要的處理，例如與OpenFlow交換機的實際通信以及與接收的消息相對應的事件的發布
+   - 在OpenFlow中，datapath代表的就是Switch
    
 6. Why need to set "`ip_proto=17`" in the flow entry?
    - 設定IP協定種類為UDP(port=17)
@@ -146,6 +148,7 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
     * [深入OpenFlow協定](https://www.netadmin.com.tw/article_content.aspx?sn=1610070003)
     * [OpenFlow Switch學習筆記](https://www.cnblogs.com/CasonChan/p/4620652.html)
     * [Iperf頻寬測試工具@ PiNG^2 :: 隨意窩Xuite日誌](https://blog.xuite.net/u870q217/blog/31513614-Iperf%E9%A0%BB%E5%AF%AC%E6%B8%AC%E8%A9%A6%E5%B7%A5%E5%85%B7)
+    * [Ryu-Simple Switch with Openflow 1.3](https://github.com/OSE-Lab/Learning-SDN/blob/master/Controller/Ryu/SimpleSwitch/README.md)
 * **Ryu SDN**
     * [Ryubook Documentation](https://osrg.github.io/ryu-book/en/html/)
     * [Ryubook [PDF]](https://osrg.github.io/ryu-book/en/Ryubook.pdf)
