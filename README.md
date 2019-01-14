@@ -128,8 +128,8 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
    - 在OpenFlow中，datapath代表的就是Switch
    
 6. Why need to set "`ip_proto=17`" in the flow entry?
-   - 設定IP協定種類為UDP(port=17)
-   - ip_proto為IP協定的種類，port=17是UDP的專屬port
+   - 設定IP協定種類為UDP(17)
+   - ip_proto為IP協定的種類
    
 7. Compare the differences between the iPerf results of `SimpleController.py` and `controller.py` in detail.
    - SimpleController.py的total loss比controller.py多，多次測試兩者大約相差0.9%~1.7%
