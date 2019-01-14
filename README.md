@@ -20,9 +20,9 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
 - [sudo] mn --custom topo.py --topo topo --link tc --controller remote
    - 進入到mininet 使用自訂的topo.py topo使用自定義的topo 連線 控制器為遠端控制
 - [sudo] ryu-manager SimpleController.py –-observe-links
-   - 啟動Ryu SDN Controller 根據SimpleController.py 建立連線
+   - 啟動Ryu SDN Controller 根據SimpleController.py 建立連線(依據topo.py)
 - [sudo] ryu-manager controller.py –-observe-links
-   -  啟動Ryu SDN Controller 根據controller.py 建立連線
+   -  啟動Ryu SDN Controller 根據controller.py 建立連線(依據topo.py)
 - mininet> h1 iperf -s -u -i 1 –p 5566 > ./out/result1 &
    - host 1 開啟iPerf 以server模式啟動 使用udp通訊協定 每隔1s更新頻寬資訊 server和client溝通port為5566 結果result1檔會傳至out資料夾中
 - mininet> h1 iperf -s -u -i 1 –p 5566 > ./out/result2 &
@@ -36,6 +36,7 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
    - --topo 設定特定的拓樸模式及規格
    - --controller 指定控制器類型
    - --link 可自訂連線的參數 頻寬等
+   - --observe-links用於指明拓樸發現
 - iPerf指令的意思    
    - -s 以server模式啟動
    - -u 使用udp協議
