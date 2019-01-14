@@ -140,7 +140,7 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
 8. Which forwarding rule is better? Why?
    - controller.py的fowarding rule比較好，packet loss的%數較低
    - 原先的SimpleController.py無論h1送封包至h2或是h2送封包到h1皆走同一條路
-   - 而controller.py則將h2送至h1的封包經由s3交給s2再轉交給s2
+   - 而controller.py則將h2送至h1的封包經由s3交給s2再轉交給s1
 
 ---
 ## References
