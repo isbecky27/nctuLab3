@@ -35,7 +35,7 @@ In this lab, we are going to write a Python program with Ryu SDN framework to bu
    - --custom 使用客製化的拓樸
    - --topo 設定特定的拓樸模式及規格
    - --controller 指定控制器類型
-   - --link 可制定連線的參數 頻寬等
+   - --link 可自訂連線的參數 頻寬等
 - iPerf指令的意思    
    - -s 以server模式啟動
    - -u 使用udp協議
